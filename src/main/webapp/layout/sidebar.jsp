@@ -37,31 +37,18 @@
             </li>
 
             <li class="menu mt-3">
-                <a href="svProducto" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <a href="svProducto" class="dropdown-toggle">
                     <div class="">
-                        <span class="material-icons">menu_book</span>
+                        <span class="material-icons">inventory_2 </span>
                         <span>Productos</span>
                     </div>
-                     <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                    </div>
                 </a>
-                <ul class="collapse submenu list-unstyled" id="apps1" data-bs-parent="#accordionExample">
-                    
-                    
-                    <% if ("administrador".equals(request.getSession().getAttribute("rol"))) { %>
-                        <!-- contenido para admin -->
-                    <% } %>
-
-                    
-                    <li><a href="svProducto"> Ver productos </a></li>
-                </ul>
             </li>
 
             <li class="menu">
                 <a href="#apps2" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
-                        <span class="material-icons">bookmark</span>
+                        <span class="material-icons">label </span>
                         <span>Categorías</span>
                     </div>
                      <div>
@@ -70,22 +57,36 @@
                 </a>
                 <ul class="collapse submenu list-unstyled" id="apps2" data-bs-parent="#accordionExample">
                     <li><a href="svReservaLibro"> Lista Categorías </a></li>
+                    <li><a href="svReservaLibro"> Crear Categorías </a></li>
                 </ul>
             </li>
-            <% if ("administrador".equals(request.getSession().getAttribute("rol"))) { %>
             <li class="menu">
                 <a href="#apps3" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
-                        <span class="material-icons">group</span>
-                        <span>Usuarios</span>
+                        <span class="material-icons">article </span>
+                        <span>Posts</span>
                     </div>
                      <div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
                     </div>
                 </a>
                 <ul class="collapse submenu list-unstyled" id="apps3" data-bs-parent="#accordionExample">
-                    <li><a href="svUsuarios"> Lista de Categorías </a></li>
+                    <li><a href="svPost"> Ver Posts </a></li>                    
+                    <li><a href="crearPost.jsp"> Nuevo Post </a></li>
+                    
+                    <% if ("administrador".equals(request.getSession().getAttribute("rol"))) { %>
+                        <li><a href="svReservaLibro"> Listar Post </a></li>
+                    <% } %>
                 </ul>
+            </li>
+            <% if ("administrador".equals(request.getSession().getAttribute("rol"))) { %>
+            <li class="menu">
+                <a href="svUsuarios" class="dropdown-toggle">
+                    <div class="">
+                        <span class="material-icons">group</span>
+                        <span>Usuarios</span>
+                    </div>
+                </a>
             </li>
             <% } %>
         </ul>

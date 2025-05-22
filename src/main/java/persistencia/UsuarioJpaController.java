@@ -25,14 +25,13 @@ public class UsuarioJpaController implements Serializable {
     public UsuarioJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
+    public UsuarioJpaController() {
+        emf=Persistence.createEntityManagerFactory("sistema_verdigo");
+    }
     private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
-    }
-    
-    public UsuarioJpaController() {
-        emf=Persistence.createEntityManagerFactory("sistema_verdigo");
     }
 
     public void create(Usuario usuario) {

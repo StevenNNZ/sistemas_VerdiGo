@@ -7,11 +7,9 @@ import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
-import logica.Producto;
-import logica.Pedido;
+import logica.*;
 
 import logica.Usuario;
-import logica.exceptions.NonexistentEntityException;
 import org.eclipse.persistence.exceptions.DatabaseException;
 
 
@@ -21,6 +19,8 @@ public class ControladoraPersistencia {
     UsuarioJpaController usuJPA  = new UsuarioJpaController();
     PedidoJpaController pedidoJPA = new PedidoJpaController();
     ProductoJpaController producJPA = new ProductoJpaController();
+    PostJpaController postJPA = new PostJpaController();
+    ComentarioJpaController comentarioJPA = new ComentarioJpaController();
 
     public void crearUsuario(Usuario usu) throws Exception {
         try {
@@ -86,7 +86,7 @@ public class ControladoraPersistencia {
     }
 
     public List<Producto> traerproducto() {
-        return producJPA.findproductoEntities();
+        return producJPA.findProductoEntities();
     }
 
     public Producto traerProductos (String id_producto) {
@@ -140,7 +140,63 @@ public class ControladoraPersistencia {
             em.close();
         }
     }
-
     
-   
+    
+    //Métodos para Post:
+    public void crearPost(Post post) {
+        postJPA.create(post);
+    }
+
+    public void editarPost(Post post) {
+        try {
+            postJPA.edit(post);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void eliminarPost(int id) {
+        try {
+            postJPA.destroy(id);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public List<Post> traerPosts() {
+        return postJPA.findPostEntities();
+    }
+
+    public Post traerPost(int id) {
+        return postJPA.findPost(id);
+    }
+
+    //Métodos para Comentario:
+    public void crearComentario(Comentario comentario) {
+        comentarioJPA.create(comentario);
+    }
+
+    public void eliminarComentario(int id) {
+        try {
+            comentarioJPA.destroy(id);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void editarComentario(Comentario comentario) {
+        try {
+            comentarioJPA.edit(comentario);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public List<Comentario> traerComentarios() {
+        return comentarioJPA.findComentarioEntities();
+    }
+
+    public Comentario traerComentario(int id) {
+        return comentarioJPA.findComentario(id);
+    }
 }

@@ -7,7 +7,6 @@ logica\Producto_.class
 servlets\svUsuarios.class
 utils\ResponseUtil.class
 servlets\svProducto.class
-logica\exceptions\PreexistingEntityException.class
 persistencia\UsuarioJpaController.class
 servlets\svEditarProducto.class
 persistencia\exceptions\PreexistingEntityException.class
@@ -15,7 +14,6 @@ utils\ValidadorProducto.class
 persistencia\ControladoraPersistencia.class
 persistencia\exceptions\IllegalOrphanException.class
 logica\Pedido.class
-logica\exceptions\NonexistentEntityException.class
 servlets\svEliminarUsuario.class
 servlets\svEditarUsuario.class
 servlets\svLogin.class
@@ -27,5 +25,4 @@ persistencia\PedidoJpaController.class
 logica\Producto.class
 persistencia\exceptions\NonexistentEntityException.class
 servlets\svEliminarProducto.class
-logica\exceptions\IllegalOrphanException.class
 logica\Pedido_.class

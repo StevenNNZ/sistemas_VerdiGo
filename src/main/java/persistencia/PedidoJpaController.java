@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package persistencia;
 
 import java.io.Serializable;
@@ -12,17 +16,20 @@ import javax.persistence.criteria.Root;
 import logica.Pedido;
 import persistencia.exceptions.NonexistentEntityException;
 
+/**
+ *
+ * @author estiv
+ */
 public class PedidoJpaController implements Serializable {
 
-    private final EntityManagerFactory emf;
-
-    public PedidoJpaController() {
-        this.emf = Persistence.createEntityManagerFactory("sistema_verdigo");
-    }
-    
     public PedidoJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
+    
+    public PedidoJpaController() {
+        emf=Persistence.createEntityManagerFactory("sistema_verdigo");
+    }
+    private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
@@ -65,12 +72,7 @@ public class PedidoJpaController implements Serializable {
         }
     }
 
-    /**
-     *
-     * @param id
-     * @throws NonexistentEntityException
-     */
-    public void destroy(Long id) throws NonexistentEntityException {
+    public void destroy(int id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -137,27 +139,4 @@ public class PedidoJpaController implements Serializable {
         }
     }
     
-    // Métodos adicionales para búsquedas específicas
-    
-    public List<Pedido> findPedidosByEmail(String email) {
-        EntityManager em = getEntityManager();
-        try {
-            Query q = em.createQuery("SELECT p FROM Pedido p WHERE p.usuario.correo = :email");
-            q.setParameter("email", email);
-            return q.getResultList();
-        } finally {
-            em.close();
-        }
-    }
-    
-    public List<Pedido> findPedidosByEstado(String estado) {
-        EntityManager em = getEntityManager();
-        try {
-            Query q = em.createQuery("SELECT p FROM Pedido p WHERE p.estado = :estado");
-            q.setParameter("estado", estado);
-            return q.getResultList();
-        } finally {
-            em.close();
-        }
-    }
 }
