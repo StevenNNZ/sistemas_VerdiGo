@@ -56,12 +56,37 @@
                     </div>
                 </a>
                 <ul class="collapse submenu list-unstyled" id="apps2" data-bs-parent="#accordionExample">
-                    <li><a href="svReservaLibro"> Lista Categorías </a></li>
-                    <li><a href="svReservaLibro"> Crear Categorías </a></li>
+                    <li><a href="svCategoria"> Lista Categorías </a></li>
+                    
+                    
+                    <% if ("administrador".equals(request.getSession().getAttribute("rol"))) { %>
+                    <li><a href="crearCategorias.jsp"> Crear Categorías </a></li>
+                    <% } %>
                 </ul>
             </li>
-            <li class="menu">
+                
+                <li class="menu">
                 <a href="#apps3" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <div class="">
+                        <span class="material-icons">verified </span>
+                        <span>Certificaciones</span>
+                    </div>
+                     <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+                <ul class="collapse submenu list-unstyled" id="apps3" data-bs-parent="#accordionExample">
+                    <li><a href="svCertificacion"> Lista Certificaciones </a></li>
+                    
+                    <% if ("administrador".equals(request.getSession().getAttribute("rol"))) { %>
+                    <li><a href="crearCertificacion.jsp"> Crear Certificaciones </a></li>
+                    <% } %>
+                </ul>
+            </li>
+                
+                
+            <li class="menu">
+                <a href="#apps4" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
                         <span class="material-icons">article </span>
                         <span>Posts</span>
@@ -70,13 +95,15 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
                     </div>
                 </a>
-                <ul class="collapse submenu list-unstyled" id="apps3" data-bs-parent="#accordionExample">
+                <ul class="collapse submenu list-unstyled" id="apps4" data-bs-parent="#accordionExample">
                     <li><a href="svPost"> Ver Posts </a></li>                    
                     <li><a href="crearPost.jsp"> Nuevo Post </a></li>
                     
+                    <!--
                     <% if ("administrador".equals(request.getSession().getAttribute("rol"))) { %>
                         <li><a href="svReservaLibro"> Listar Post </a></li>
                     <% } %>
+                    -->
                 </ul>
             </li>
             <% if ("administrador".equals(request.getSession().getAttribute("rol"))) { %>

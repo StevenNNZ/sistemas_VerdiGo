@@ -1,4 +1,3 @@
-
 package logica;
 
 import java.io.Serializable;
@@ -6,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -13,7 +13,7 @@ import javax.persistence.Id;
  */
 @Entity
 public class Producto implements Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_producto;
@@ -21,20 +21,26 @@ public class Producto implements Serializable {
     private String descripcion;
     private double precio;
     private int stock;
-    private String certificacion;
     private String impactoAmbiental;
+
+    @ManyToOne
+    private Categoria categoria;
+
+    @ManyToOne
+    private Certificacion certificacion;
 
     public Producto() {
     }
-    
-     public Producto(int id_producto, String nombre, String descripcion, double precio, int stock, String certificacion, String impactoAmbiental) {
+
+    public Producto(int id_producto, String nombre, String descripcion, double precio, int stock, String impactoAmbiental, Categoria categoria, Certificacion certificacion) {
         this.id_producto = id_producto;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.stock = stock;
-        this.certificacion = certificacion;
         this.impactoAmbiental = impactoAmbiental;
+        this.categoria = categoria;
+        this.certificacion = certificacion;
     }
 
     public int getId_producto() {
@@ -77,11 +83,19 @@ public class Producto implements Serializable {
         this.stock = stock;
     }
 
-    public String getCertificacion() {
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public Certificacion getCertificacion() {
         return certificacion;
     }
 
-    public void setCertificacion(String certificacion) {
+    public void setCertificacion(Certificacion certificacion) {
         this.certificacion = certificacion;
     }
 
@@ -92,7 +106,5 @@ public class Producto implements Serializable {
     public void setImpactoAmbiental(String impactoAmbiental) {
         this.impactoAmbiental = impactoAmbiental;
     }
-
-   
 
 }

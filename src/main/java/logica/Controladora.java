@@ -126,8 +126,52 @@ public class Controladora {
     public Comentario buscarComentario(int id) {
         return controlPersis.traerComentario(id);
     }
-    
+
     public void editarComentario(Comentario comentario) {
         controlPersis.editarComentario(comentario);
     }
+
+    //Categoria
+    public void crearCategoria(Categoria cat) {
+        controlPersis.crearCategoria(cat);
+
+    }
+
+    public Categoria traerCategoria(int id) {
+        return controlPersis.traerCategoria(id);
+    }
+
+    public List<Categoria> traerCategorias() {
+        return controlPersis.traerCategorias();
+    }
+
+    public void editarCategoria(Categoria categoria) {
+        controlPersis.editarCategoria(categoria);
+    }
+
+    public void eliminarCategoria(int id) {
+        controlPersis.eliminarCategoria(id);
+    }
+
+    //Certificaciion
+    public void crearCertificacion(Certificacion cert) {
+        controlPersis.crearCertificacion(cert);
+    }
+
+    public List<Certificacion> traerCertificaciones() {
+        return controlPersis.traerCertificaciones();
+    }
+
+    public Certificacion traerCertificacion(int id) {
+        return controlPersis.traerCertificacion(id);
+    }
+
+    public void editarCertificacion(Certificacion cert) {
+        controlPersis.editarCertificacion(cert);
+    }
+
+    public void eliminarCertificacion(int id) {
+        controlPersis.eliminarCertificacion(id);
+    }
+
 }

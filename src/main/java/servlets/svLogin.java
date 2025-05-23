@@ -57,7 +57,7 @@ public class svLogin extends HttpServlet {
             misession.setAttribute("nombres", usuarioEnt.getNombres());
             
             
-            response.sendRedirect("svPerfil");
+            response.sendRedirect("index.jsp");
             
         }else{
             ResponseUtil.sendAlert(response, "¡Oops!", "Usuario o contraseña incorrectos.", "error", "login.jsp");

@@ -27,7 +27,7 @@ public class ValidadorProducto {
         }
         return true;
     }
-    
+
     public boolean validarAnio(String anio) {
         if (anio == null || !Pattern.matches("\\d{4}", anio)) {
             errors.add("Año inválido: debe ser un número de 4 dígitos.");
@@ -43,7 +43,7 @@ public class ValidadorProducto {
         }
         return true;
     }
-    
+
     public boolean validarGenero(String genero) {
         if (genero == null || !Pattern.matches("[A-Za-z\\s]{1,100}", genero)) {
             errors.add("Género inválido: solo letras y espacios, 1-100 caracteres.");
@@ -51,7 +51,7 @@ public class ValidadorProducto {
         }
         return true;
     }
-    
+
     public boolean validarDisponible(String disponible) {
         if (disponible == null || (!"true".equalsIgnoreCase(disponible) && !"false".equalsIgnoreCase(disponible))) {
             errors.add("Disponibilidad inválida: debe ser 'true' o 'false'.");
@@ -100,7 +100,6 @@ public class ValidadorProducto {
         }
     }
 
-    
     public static void validarStock(String stockStr) {
         if (stockStr == null || stockStr.trim().isEmpty()) {
             throw new IllegalArgumentException("El stock no puede estar vacío.");
@@ -115,7 +114,6 @@ public class ValidadorProducto {
         }
     }
 
-
     public static void validarCertificacion(String certificacion) {
         if (certificacion == null || certificacion.trim().isEmpty()) {
             throw new IllegalArgumentException("La certificación no puede estar vacía.");
@@ -124,7 +122,6 @@ public class ValidadorProducto {
             throw new IllegalArgumentException("La certificación debe tener al menos 3 caracteres.");
         }
     }
-
 
     public static void validarImpactoAmbiental(String impactoAmbiental) {
         if (impactoAmbiental == null || impactoAmbiental.trim().isEmpty()) {
@@ -137,6 +134,36 @@ public class ValidadorProducto {
             }
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("El impacto ambiental debe ser un número válido.");
+        }
+    }
+
+    public void validarIdCategoria(String idCategoria) {
+        if (idCategoria == null || idCategoria.trim().isEmpty()) {
+            errors.add("Debe seleccionar una categoría.");
+            return;
+        }
+        try {
+            int id = Integer.parseInt(idCategoria);
+            if (id <= 0) {
+                errors.add("Seleccione una categoría válida.");
+            }
+        } catch (NumberFormatException e) {
+            errors.add("ID de categoría inválido.");
+        }
+    }
+
+    public void validarIdCertificacion(String idCertificacion) {
+        if (idCertificacion == null || idCertificacion.trim().isEmpty()) {
+            errors.add("Debe seleccionar una certificación.");
+            return;
+        }
+        try {
+            int id = Integer.parseInt(idCertificacion);
+            if (id <= 0) {
+                errors.add("Seleccione una certificación válida.");
+            }
+        } catch (NumberFormatException e) {
+            errors.add("ID de certificación inválido.");
         }
     }
 }

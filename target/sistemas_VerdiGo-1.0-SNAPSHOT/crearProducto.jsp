@@ -1,3 +1,9 @@
+<%@ page import="logica.Categoria, logica.Certificacion, java.util.List" %>
+<%
+List<Categoria> categorias = (List<Categoria>) session.getAttribute("listaCategorias");
+List<Certificacion> certificaciones = (List<Certificacion>) session.getAttribute("listaCertificaciones");
+%>
+
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -77,12 +83,33 @@
                                                 </div>
                                             </div>
 
-                                            <!-- Certificación -->
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="certificacion">Certificación</label>
-                                                    <input type="text" class="form-control mb-3" id="certificacion" name="certificacion" placeholder="Certificación del producto" minlength="1" maxlength="100">
-                                                </div>
+                                            <!-- Categoría --> 
+                                            <div class="col-md-6"> 
+                                                <div class="form-group"> 
+                                                    <label for="categoria">Categoría</label> 
+                                                    <select class="form-control mb-3" name="idCategoria" id="categoria" required> 
+                                                        <option value="">Seleccione</option> 
+                                                        <% if (categorias != null) {
+                                                        for (Categoria cat : categorias) {%> 
+                                                        <option value="<%= cat.getId()%>"><%= cat.getNombre()%></option> 
+                                                        <% }
+                                                        } %> 
+                                                    </select> 
+                                                </div> 
+                                            </div>
+                                                
+                                            <!-- Certificación --> 
+                                            <div class="col-md-6"> 
+                                                <div class="form-group"> 
+                                                    <label for="certificacion">Certificación</label> 
+                                                    <select class="form-control mb-3" name="idCertificacion" id="certificacion" required> 
+                                                        <option value="">Seleccione</option> 
+                                                        <% if (certificaciones != null) {
+                                                        for (Certificacion cert : certificaciones) {%> 
+                                                        <option value="<%= cert.getId()%>"><%= cert.getNombre()%></option> <% }
+                                                        }%> 
+                                                    </select> 
+                                                </div> 
                                             </div>
 
                                             <!-- Impacto Ambiental -->

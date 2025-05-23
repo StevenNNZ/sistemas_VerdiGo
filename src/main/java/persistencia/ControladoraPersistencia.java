@@ -12,15 +12,15 @@ import logica.*;
 import logica.Usuario;
 import org.eclipse.persistence.exceptions.DatabaseException;
 
-
-
 public class ControladoraPersistencia {
-    
-    UsuarioJpaController usuJPA  = new UsuarioJpaController();
+
+    UsuarioJpaController usuJPA = new UsuarioJpaController();
     PedidoJpaController pedidoJPA = new PedidoJpaController();
     ProductoJpaController producJPA = new ProductoJpaController();
     PostJpaController postJPA = new PostJpaController();
     ComentarioJpaController comentarioJPA = new ComentarioJpaController();
+    CategoriaJpaController catJPA = new CategoriaJpaController();
+    CertificacionJpaController certJPA = new CertificacionJpaController();
 
     public void crearUsuario(Usuario usu) throws Exception {
         try {
@@ -30,7 +30,7 @@ public class ControladoraPersistencia {
         } catch (PersistenceException e) {
             Throwable cause = e.getCause();
             if (cause instanceof DatabaseException) {
-                Throwable internalException = ((DatabaseException)cause).getInternalException();
+                Throwable internalException = ((DatabaseException) cause).getInternalException();
                 if (internalException instanceof java.sql.SQLIntegrityConstraintViolationException) {
                     throw new Exception("El correo ya está registrado.", internalException);
                 }
@@ -38,7 +38,7 @@ public class ControladoraPersistencia {
             throw new Exception("Error en la base de datos. Intenta de nuevo más tarde.", e);
         }
     }
-    
+
     public void editarUsuario(Usuario usu) {
         try {
             usuJPA.edit(usu);
@@ -46,19 +46,18 @@ public class ControladoraPersistencia {
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public List<Usuario> getUsuarios() {
         return usuJPA.findUsuarioEntities();
     }
 
     public void eliminarUsuario(String id) {
-            try {
-                usuJPA.destroy(Integer.parseInt(id));
-            } catch (persistencia.exceptions.NonexistentEntityException ex) {
-                Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        try {
+            usuJPA.destroy(Integer.parseInt(id));
+        } catch (persistencia.exceptions.NonexistentEntityException ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
-   
+    }
 
     public Usuario traerUsuario(int id) {
         return usuJPA.findUsuario(id);
@@ -69,15 +68,15 @@ public class ControladoraPersistencia {
 
         try {
             return em.createQuery(
-                    "SELECT u FROM Usuario u WHERE u.correo = :email", 
+                    "SELECT u FROM Usuario u WHERE u.correo = :email",
                     Usuario.class)
                     .setParameter("email", email)
                     .getSingleResult();
         } catch (NoResultException e) {
             System.out.println("No se encontró ningún usuario con el correo proporcionado: " + email);
-            return null;  
+            return null;
         } finally {
-            em.close();  
+            em.close();
         }
     }
 
@@ -89,7 +88,7 @@ public class ControladoraPersistencia {
         return producJPA.findProductoEntities();
     }
 
-    public Producto traerProductos (String id_producto) {
+    public Producto traerProductos(String id_producto) {
         return producJPA.findProducto(Integer.parseInt(id_producto));
     }
 
@@ -101,7 +100,7 @@ public class ControladoraPersistencia {
         }
     }
 
-   public void eliminarProducto(String id) {
+    public void eliminarProducto(String id) {
         try {
             producJPA.destroy(Integer.parseInt(id));
         } catch (persistencia.exceptions.NonexistentEntityException ex) {
@@ -132,16 +131,15 @@ public class ControladoraPersistencia {
     public List<Pedido> traerPedidoPorEmail(String email) {
         EntityManager em = pedidoJPA.getEntityManager();
         try {
-            return em.createQuery("SELECT p FROM Prestamo p WHERE p.usuario.correo = :email", 
+            return em.createQuery("SELECT p FROM Prestamo p WHERE p.usuario.correo = :email",
                     Pedido.class)
-                     .setParameter("email", email)
-                     .getResultList();
+                    .setParameter("email", email)
+                    .getResultList();
         } finally {
             em.close();
         }
     }
-    
-    
+
     //Métodos para Post:
     public void crearPost(Post post) {
         postJPA.create(post);
@@ -183,7 +181,7 @@ public class ControladoraPersistencia {
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void editarComentario(Comentario comentario) {
         try {
             comentarioJPA.edit(comentario);
@@ -198,5 +196,63 @@ public class ControladoraPersistencia {
 
     public Comentario traerComentario(int id) {
         return comentarioJPA.findComentario(id);
+    }
+
+    //Categorias
+    public void crearCategoria(Categoria cat) {
+        catJPA.create(cat);
+    }
+
+    public List<Categoria> traerCategorias() {
+        return catJPA.findCategoriaEntities();
+    }
+
+    public Categoria traerCategoria(int id) {
+        return catJPA.findCategoria(id);
+    }
+
+    public void editarCategoria(Categoria categoria) {
+        try {
+            catJPA.edit(categoria);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void eliminarCategoria(int id) {
+        try {
+            catJPA.destroy(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //Certificacion Métodos CRUD:
+    public void crearCertificacion(Certificacion cert) {
+        certJPA.create(cert);
+    }
+
+    public List<Certificacion> traerCertificaciones() {
+        return certJPA.findCertificacionEntities();
+    }
+
+    public Certificacion traerCertificacion(int id) {
+        return certJPA.findCertificacion(id);
+    }
+
+    public void editarCertificacion(Certificacion cert) {
+        try {
+            certJPA.edit(cert);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void eliminarCertificacion(int id) {
+        try {
+            certJPA.destroy(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
